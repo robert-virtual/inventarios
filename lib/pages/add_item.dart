@@ -17,6 +17,7 @@ class _AddItemPageState extends State<AddItemPage> {
   final tamano = TextEditingController();
   final corte = TextEditingController();
   final libras = TextEditingController();
+  final preciolibras = TextEditingController();
   final fecha = TextEditingController(text: DateTime.now().toIso8601String());
   final costoLibra = TextEditingController();
   final config = Configuration.local([Item.schema]);
@@ -83,30 +84,28 @@ class _AddItemPageState extends State<AddItemPage> {
           ),
           TextField(
             controller: tamano,
+            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               label: Text("Tamaño"),
             ),
           ),
           TextField(
             controller: corte,
+            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               label: Text("Corte"),
             ),
           ),
           TextField(
             controller: libras,
+            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               label: Text("Libras"),
             ),
           ),
           TextField(
-            controller: libras,
-            decoration: const InputDecoration(
-              label: Text("Precio por Libras"),
-            ),
-          ),
-          TextField(
-            controller: libras,
+            controller: preciolibras,
+            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
               label: Text("Precio por Libras"),
             ),
@@ -144,9 +143,11 @@ class _AddItemPageState extends State<AddItemPage> {
             int.parse(tamano.text),
             int.parse(corte.text),
             double.parse(libras.text),
+            DateTime.parse(fecha.text),
           );
           realm.write(() {
             realm.add(item);
+            Navigator.of(context).pop();
           });
         },
         tooltip: 'guardar nuevo item',

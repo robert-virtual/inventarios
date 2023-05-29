@@ -15,4 +15,5 @@ class _Item {
   late int tamano;
   late int corte;
   late double libras;
+  late DateTime fecha;
 }

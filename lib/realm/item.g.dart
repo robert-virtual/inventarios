@@ -17,6 +17,7 @@ class Item extends _Item with RealmEntity, RealmObjectBase, RealmObject {
     int tamano,
     int corte,
     double libras,
+    DateTime fecha,
   ) {
     RealmObjectBase.set(this, 'id', id);
     RealmObjectBase.set(this, 'paca', paca);
@@ -27,6 +28,7 @@ class Item extends _Item with RealmEntity, RealmObjectBase, RealmObject {
     RealmObjectBase.set(this, 'tamano', tamano);
     RealmObjectBase.set(this, 'corte', corte);
     RealmObjectBase.set(this, 'libras', libras);
+    RealmObjectBase.set(this, 'fecha', fecha);
   }
 
   Item._();
@@ -78,6 +80,12 @@ class Item extends _Item with RealmEntity, RealmObjectBase, RealmObject {
   set libras(double value) => RealmObjectBase.set(this, 'libras', value);
 
   @override
+  DateTime get fecha =>
+      RealmObjectBase.get<DateTime>(this, 'fecha') as DateTime;
+  @override
+  set fecha(DateTime value) => RealmObjectBase.set(this, 'fecha', value);
+
+  @override
   Stream<RealmObjectChanges<Item>> get changes =>
       RealmObjectBase.getChanges<Item>(this);
 
@@ -98,6 +106,7 @@ class Item extends _Item with RealmEntity, RealmObjectBase, RealmObject {
       SchemaProperty('tamano', RealmPropertyType.int),
       SchemaProperty('corte', RealmPropertyType.int),
       SchemaProperty('libras', RealmPropertyType.double),
+      SchemaProperty('fecha', RealmPropertyType.timestamp),
     ]);
   }
 }
