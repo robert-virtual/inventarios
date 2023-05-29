@@ -35,19 +35,18 @@ class _HomePageState extends State<HomePage> {
                   var excel = Excel
                       .createExcel(); // automatically creates 1 empty sheet: Sheet1
                   Sheet sheetObject = excel['Sheet1'];
-                  var cell = sheetObject.cell(CellIndex.indexByString('A1'));
-                  for (var e in items) {
+                  for (int i = 0; i < items.length; i++) {
                     sheetObject.insertRowIterables([
-                      e.lugar,
-                      e.fecha,
-                      e.paca,
-                      e.clase,
-                      e.variedad,
-                      e.detalle,
-                      e.tamano,
-                      e.corte,
-                      e.libras
-                    ], 2);
+                      items[i].lugar,
+                      items[i].fecha,
+                      items[i].paca,
+                      items[i].clase,
+                      items[i].variedad,
+                      items[i].detalle,
+                      items[i].tamano,
+                      items[i].corte,
+                      items[i].libras
+                    ], 2 + i);
                   }
                   var fileBytes = excel.save();
                   var directory = await getExternalStorageDirectory();
@@ -62,9 +61,6 @@ class _HomePageState extends State<HomePage> {
                   if (fileBytes != null) {
                     String filename =
                         "${directory.path}/inventario-${DateTime.now().toIso8601String()}.xlsx";
-                    File file = File(filename)
-                      ..createSync(recursive: true)
-                      ..writeAsBytesSync(fileBytes);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text("Archivo guardado"),
