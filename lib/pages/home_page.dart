@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                   for (int i = 0; i < items.length; i++) {
                     sheetObject.insertRowIterables([
                       items[i].lugar,
-                      items[i].fecha,
+                      items[i].fecha.toLocal(),
                       items[i].paca,
                       items[i].clase,
                       items[i].variedad,
